@@ -40,7 +40,21 @@ class RegistrationsController < Devise::RegistrationsController
       .where.not(id: current_user.id)
       .where.not(volunteer: current_user.volunteer)
 
-    # @current_count = current_user.interests.count
+      @possible_matches.each do |user|
+      newints = user.interests.ids
+      newints += @user_interests
+      @results = { 1 => [2040],
+        1002 => [2002, 2004, 2000, 2006]
+       }
+      shared_interests = []
+      newints.each { |interest|
+        if newints.count(interest) > 1
+          shared_interests.push(interest)
+        end
+      }
+      @results[user.id] = shared_interests.uniq
+    end
+      new = @results.sort_by{ |key, value| value.length}
   end
 
   private
