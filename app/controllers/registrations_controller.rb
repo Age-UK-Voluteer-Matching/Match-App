@@ -34,7 +34,13 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def show
-    @possible_matches = User.all.where("volunteer != '#{current_user.volunteer}'")
+    @user_interests = current_user.interests.ids
+    @possible_matches = User.includes(:interests)
+      .where(interests: { id: @user_interests })
+      .where.not(id: current_user.id)
+      .where.not(volunteer: current_user.volunteer)
+
+    # @current_count = current_user.interests.count
   end
 
   private
