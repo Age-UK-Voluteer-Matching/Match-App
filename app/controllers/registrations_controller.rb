@@ -40,10 +40,11 @@ class RegistrationsController < Devise::RegistrationsController
       .where.not(id: current_user.id)
       .where.not(volunteer: current_user.volunteer)
 
+      @results = {}
+
       @possible_matches.each do |user|
         other_user_interests = user.interests.ids
         other_user_interests += @user_interests
-        @results = {}
         shared_interests = []
         other_user_interests.each { |interest|
           if other_user_interests.count(interest) > 1
