@@ -34,14 +34,16 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def show
+    # grabs matches based on the interests of the current user
     @user_interests = current_user.interests.ids
     @possible_matches = User.includes(:interests)
       .where(interests: { id: @user_interests })
       .where.not(id: current_user.id)
       .where.not(volunteer: current_user.volunteer)
 
+      # hash to store the results of the support routine
       @results = {}
-
+      # support routine to calculate and order users based on who has the most matched interests
       @possible_matches.each do |user|
         other_user_interests = user.interests.ids
         other_user_interests += @user_interests
@@ -53,8 +55,10 @@ class RegistrationsController < Devise::RegistrationsController
         }
       @results[user] = shared_interests.uniq
     end
-      ordered_users = @results.sort_by{ |key, value| value.length}
-      ordered_users = ordered_users.reverse
+      ordered_users = @results.sort_by{ |key, value| -value.length}
+      # return array of users in order of most matched interests
+      p ordered_users
+
   end
 
   private
