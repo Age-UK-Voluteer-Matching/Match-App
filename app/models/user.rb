@@ -15,4 +15,6 @@ class User < ApplicationRecord
   # has_many :volunteer_users, through: :volunteer_relationships, source: :older_user
   has_many :older_users , through: :older_relationships, source: :volunteer_user
 
+  validates :attribute, phone: true
+
 end
