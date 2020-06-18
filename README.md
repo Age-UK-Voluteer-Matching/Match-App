@@ -27,6 +27,7 @@ Install dependencies:
 
 ```
 $ bundle install
+$ yarn install
 ```
 
 Create, migrate and seed the database:
@@ -51,6 +52,8 @@ This project relies on the following Rails Gems:
 - Devise (for user authentication)
 - CarrierWave (for image uploading)
 - Fog-AWS (for image storage)
+- DotEnv-Rails (for loading env variables)
+- Twilio-Ruby (for sending text messages)
 
 ## Deployment
 
@@ -113,7 +116,7 @@ I would like to choose my interests from a selection during the sign up stage
 
 As a volunteer
 So that I can connect with matches
-I would like to receive a notification containing my match's contact details
+I would like to receive a notification containing my match's name and phone number, and an instruction to login to the site to see their full profile
 ```
 
 ## App Demo
