@@ -24,7 +24,7 @@ class MatchesController < ApplicationController
 
     @client = Twilio::REST::Client.new account_sid, auth_token
     message = @client.messages.create(
-        body: "You have received a notification to connect with #{elderly.name}. Please contact her within 48hrs on #{elderly.telephone}. To see her full profile please visit age-uk-volunteer-matching.herokuapp.com",
+        body: "You have received a notification to connect with #{elderly.name}. Please contact them within 48hrs on #{elderly.telephone}. To see their full profile please visit https://volunteer-match-app.herokuapp.com/",
         to: volunteer.telephone,
         from: ENV["FROM"])
 
