@@ -65,5 +65,4 @@ class RegistrationsController < Devise::RegistrationsController
   def user_params
     params.require(:user).permit(:name, :telephone, :location, :bio, :image)
   end
-
 end

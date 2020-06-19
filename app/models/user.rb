@@ -9,10 +9,8 @@ class User < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  # has_many :volunteer_relationships, class_name: "Match", foreign_key: "volunteer_id", dependent: :destroy
   has_many :older_relationships, class_name: 'Match', foreign_key: "older_id", dependent: :destroy
-  
-  # has_many :volunteer_users, through: :volunteer_relationships, source: :older_user
+
   has_many :older_users , through: :older_relationships, source: :volunteer_user
 
 end
