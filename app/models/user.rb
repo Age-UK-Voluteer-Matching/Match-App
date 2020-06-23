@@ -6,11 +6,8 @@ class User < ApplicationRecord
 
   has_many :userinterests
   has_many :interests, through: :userinterests, dependent: :destroy
-
-  mount_uploader :image, ImageUploader
-
   has_many :older_relationships, class_name: 'Match', foreign_key: "older_id", dependent: :destroy
-
   has_many :older_users , through: :older_relationships, source: :volunteer_user
-
+  
+  mount_uploader :image, ImageUploader
 end
