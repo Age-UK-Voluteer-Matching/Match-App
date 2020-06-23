@@ -31,15 +31,16 @@ class RegistrationsController < Devise::RegistrationsController
 
   def update_image
     @user = current_user
-
-    p params
+    
     respond_to do |format|
       if @user.update(user_params)
-        if user_params[:image] == nil
+        if user_params[:image] == ""
           img = Avatarly.generate_avatar(@user.name)
           File.open("public/images/avatar_#{@user.name}.png", 'wb') do |f|
             f.write img
+            @user.image = f
           end
+          @user.save!
           format.html { redirect_to show_path }
         end
         format.html { redirect_to show_path }
@@ -82,5 +83,5 @@ class RegistrationsController < Devise::RegistrationsController
   def user_params
     params.require(:user).permit(:name, :telephone, :location, :bio, :image)
   end
-  
+
 end
