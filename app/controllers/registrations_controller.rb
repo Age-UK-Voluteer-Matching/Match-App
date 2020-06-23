@@ -31,7 +31,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def update_image
     @user = current_user
-    
+
     respond_to do |format|
       if @user.update(user_params)
         if user_params[:image] == ""
