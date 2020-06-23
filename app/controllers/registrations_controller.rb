@@ -16,18 +16,34 @@ class RegistrationsController < Devise::RegistrationsController
     @user = current_user
   end
 
-  def update
+  def update_info
     @user = current_user
 
     respond_to do |format|
       if @user.update(user_params)
-        if user_params[:image] == nil
-          format.html { redirect_to add_userinterests_path }
-        else
+        format.html { redirect_to add_userinterests_path }
+      else
+        format.html { render :add_info }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_image
+    @user = current_user
+
+    p params
+    respond_to do |format|
+      if @user.update(image_params)
+        if image_params[:image] == 'dummy.png'
+          img = Avatarly.generate_avatar(@user.name)
+          File.open("public/images/avatar_#{@user.name}.png", 'wb') do |f|
+            f.write img
+          end
           format.html { redirect_to show_path }
         end
       else
-        format.html { render :add_info }
+        format.html { render :add_image }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
@@ -64,5 +80,9 @@ class RegistrationsController < Devise::RegistrationsController
 
   def user_params
     params.require(:user).permit(:name, :telephone, :location, :bio, :image)
+  end
+
+  def image_params
+    params.permit(:image)
   end
 end

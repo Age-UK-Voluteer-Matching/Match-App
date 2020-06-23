@@ -7,7 +7,7 @@
       <h3>We want to find you the perfect match. Tell us a bit about yourself...</h3>
     </div>
   </div>
-<%= form_for @user, url: url_for(controller: 'registrations', action: 'update') do |f| %>
+<%= form_for @user, url: url_for(controller: 'registrations', action: 'update_info') do |f| %>
   <div class="form-group row field">
       <%= f.label :telephone, :class => "col-sm-5 col-form-label", :style => "text-align: end;"%>
       <div class="col-sm-7">

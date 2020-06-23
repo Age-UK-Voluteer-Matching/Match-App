@@ -1,7 +1,7 @@
 <div class="container text-center" style="margin-top: 50px;">
 <h3>Please upload an image of yourself</h3>
 
-<%= form_for @user, url: url_for(controller: 'registrations', action: 'update') do |f| %>
+<%= form_for @user, url: url_for(controller: 'registrations', action: 'update_image') do |f| %>
 
   <div class="field">
     <%= f.file_field :image, :style => "margin-left:12%" %>
@@ -10,5 +10,6 @@
   <div class="actions">
     <%= f.submit "Upload Image", :class => "btn btn-primary", :style => "margin-top: 10px" %>
   </div>
+  <%= button_to "Skip", {:controller => "registrations", :action => "update_image"}, params: {image: 'dummy.png'}, :method => :patch, :class => "btn btn-primary", :style => "margin-top: 10px" %>
 <% end %>
 </div>
