@@ -34,14 +34,15 @@ class RegistrationsController < Devise::RegistrationsController
 
     p params
     respond_to do |format|
-      if @user.update(image_params)
-        if image_params[:image] == 'dummy.png'
+      if @user.update(user_params)
+        if user_params[:image] == nil
           img = Avatarly.generate_avatar(@user.name)
           File.open("public/images/avatar_#{@user.name}.png", 'wb') do |f|
             f.write img
           end
           format.html { redirect_to show_path }
         end
+        format.html { redirect_to show_path }
       else
         format.html { render :add_image }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
@@ -81,8 +82,5 @@ class RegistrationsController < Devise::RegistrationsController
   def user_params
     params.require(:user).permit(:name, :telephone, :location, :bio, :image)
   end
-
-  def image_params
-    params.permit(:image)
-  end
+  
 end

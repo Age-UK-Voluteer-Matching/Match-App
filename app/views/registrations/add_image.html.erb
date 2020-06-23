@@ -10,6 +10,18 @@
   <div class="actions">
     <%= f.submit "Upload Image", :class => "btn btn-primary", :style => "margin-top: 10px" %>
   </div>
-  <%= button_to "Skip", {:controller => "registrations", :action => "update_image"}, params: {image: 'dummy.png'}, :method => :patch, :class => "btn btn-primary", :style => "margin-top: 10px" %>
 <% end %>
+
+<%= form_for @user, url: url_for(controller: 'registrations', action: 'update_image') do |f| %>
+
+  <div class="field">
+    <%= f.hidden_field :image, value: params[:image]%>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Skip", :class => "btn btn-primary", :style => "margin-top: 10px" %>
+  </div>
+
+  <%end%>
+
 </div>
