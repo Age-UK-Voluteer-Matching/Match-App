@@ -1,7 +1,7 @@
 <div class="container text-center" style="margin-top: 50px;">
 <h3>Please upload an image of yourself</h3>
 
-<%= form_for @user, url: url_for(controller: 'registrations', action: 'update_image') do |f| %>
+<%= form_with model: @user, url: url_for(controller: 'registrations', action: 'update_image') do |f| %>
 
   <div class="field">
     <%= f.file_field :image, :style => "margin-left:12%" %>
