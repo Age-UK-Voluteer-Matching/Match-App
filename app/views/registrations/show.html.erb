@@ -1,5 +1,4 @@
 <div class="container" style="margin-top: 70px;">
-<%= image_tag current_user.image_url.to_s, alt: "image", class: "profile-picture" %>
   <h3 class="text-center">Here are some matches based on your interests. Get in contact with them to start a conversation, they’re waiting to hear from you!</h3>
   <% @possible_matches.each do |profile| %>
       <div class="row" style="margin-top:70px">

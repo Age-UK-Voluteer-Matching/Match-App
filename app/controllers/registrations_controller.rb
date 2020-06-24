@@ -35,7 +35,7 @@ class RegistrationsController < Devise::RegistrationsController
     respond_to do |format|
       if @user.update(user_params)
         if user_params[:image] == ""
-          img = Avatarly.generate_avatar(@user.name)
+          img = Avatarly.generate_avatar(@user.name, opts={size: 128})
           File.open("public/images/avatar_#{@user.name}.png", 'wb') do |f|
             f.write img
             @user.image = f
