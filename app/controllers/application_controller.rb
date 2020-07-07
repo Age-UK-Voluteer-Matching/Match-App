@@ -1,4 +1,6 @@
-class ApplicationController < ActionController::Base
+class ApplicationController < ActionController::API
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
+  include ActionController::HttpAuthentication::Token::ControllerMethods
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
